@@ -142,17 +142,13 @@ class StackViewController: UIViewController {
         //playerView.layoutIfNeeded()
     }
     
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        if UIDevice.current.orientation.isLandscape {
-//            print(view.bounds.height)
-//        } else {
-//            print(view.bounds.height)
-//        }
-//
-//        playerView.frame = videoContainerView.bounds
-//
-//    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (context) in
+        }) { (context) in
+          self.playerView.frame.size = self.videoContainerView.bounds.size
+        }
+      }
     
     private func setup() {
         view.addSubview(contentStackView)
@@ -200,7 +196,7 @@ class StackViewController: UIViewController {
         //playerView = AVPlayerLayer()
         playerView.player = player
 //        playerView.frame = videoContainerView.bounds
-        playerView.videoGravity = .resizeAspectFill
+        playerView.videoGravity = .resizeAspect
         //videoContainerView.layer.addSublayer(playerView)
         player?.volume = 0
     }
