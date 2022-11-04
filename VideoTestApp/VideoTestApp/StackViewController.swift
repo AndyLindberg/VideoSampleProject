@@ -58,8 +58,8 @@ class StackViewController: UIViewController {
         button1.translatesAutoresizingMaskIntoConstraints = false
         button1.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button1.widthAnchor.constraint(equalToConstant: 50).isActive = true
-
-
+        
+        
         return button1
     }()
     
@@ -71,7 +71,7 @@ class StackViewController: UIViewController {
         button2.translatesAutoresizingMaskIntoConstraints = false
         button2.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button2.widthAnchor.constraint(equalToConstant: 50).isActive = true
-
+        
         return button2
     }()
     
@@ -95,10 +95,10 @@ class StackViewController: UIViewController {
     
     fileprivate lazy var videoContainerView: UIView = {
         let view = UIView()
-
+        
         view.heightAnchor.constraint(equalToConstant: 150).isActive = true
         //view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 9/16).isActive = true
-
+        
         view.backgroundColor = .green
         return view
     }()
@@ -109,13 +109,15 @@ class StackViewController: UIViewController {
                 
                 configureVideo(with: firstVideo)
                 setup()
+            }else {
+                showVideoErrorAlert()
             }
         }
     }
     
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-            super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
     convenience init(viewModel: ViewModelProtocol) {
@@ -127,7 +129,7 @@ class StackViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("This class does not support NSCoder")
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,9 +152,19 @@ class StackViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (context) in
         }) { (context) in
-          self.playerView.frame.size = self.videoContainerView.bounds.size
+            self.playerView.frame.size = self.videoContainerView.bounds.size
         }
-      }
+    }
+    
+    private func showVideoErrorAlert() {
+        let alert = UIAlertController (title: "Error retrieving video", message: "There was an issue retrieving your video, please try again", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction (title: "Okay", style: .cancel) { (action) in
+            
+        }
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     private func setup() {
         view.addSubview(contentStackView)
@@ -191,7 +203,7 @@ class StackViewController: UIViewController {
         }
         videoTitleLabel.text = model.title
         videoDescriptionLabel.text = model.description
-
+        
         guard let videoURL = URL(string: videoURLString) else { return }
         
         player = AVPlayer(url: videoURL)

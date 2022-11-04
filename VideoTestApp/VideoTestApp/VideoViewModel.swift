@@ -29,7 +29,7 @@ class VideoViewModel: ViewModelProtocol {
     }
     
     func getFirstVideo() -> VideoModel? {
-        return videos[1]
+        return videos[0]
     }
 
 }
