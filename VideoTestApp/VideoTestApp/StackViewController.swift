@@ -11,8 +11,9 @@ import AVKit
 
 class StackViewController: UIViewController {
     
-    // AVKit Variables
     private let viewModel = VideoViewModel()
+    
+    // AVKit Variables
     private var playerLayer: AVPlayerLayer?
     private var player: AVPlayer?
     private var playerView = AVPlayerLayer()
@@ -112,7 +113,6 @@ class StackViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -125,21 +125,9 @@ class StackViewController: UIViewController {
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print("ViewWillLayoutSubviews!!")
-//        let screenSize = UIScreen.main.bounds
-//        let screenWidth = screenSize.width
-//        videoContainerView.widthAnchor.constraint(equalToConstant: screenWidth).isActive = true
-//        videoContainerView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 150)
-//        playerView.frame = videoContainerView.bounds
-        
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         playerView.frame = videoContainerView.bounds
-        //playerView.layoutIfNeeded()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -185,19 +173,14 @@ class StackViewController: UIViewController {
         guard let model = videoModel, let videoURLString = model.videoURL else {
             return
         }
-        //videoContainerView.layoutIfNeeded()
         videoTitleLabel.text = model.title
         videoDescriptionLabel.text = model.description
 
         guard let videoURL = URL(string: videoURLString) else { return }
         
         player = AVPlayer(url: videoURL)
-
-        //playerView = AVPlayerLayer()
         playerView.player = player
-//        playerView.frame = videoContainerView.bounds
         playerView.videoGravity = .resizeAspect
-        //videoContainerView.layer.addSublayer(playerView)
         player?.volume = 0
     }
     
