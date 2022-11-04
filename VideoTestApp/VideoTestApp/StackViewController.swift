@@ -11,7 +11,7 @@ import AVKit
 
 class StackViewController: UIViewController {
     
-    private let viewModel = VideoViewModel()
+    private var viewModel: ViewModelProtocol? = nil
     
     // AVKit Variables
     private var playerLayer: AVPlayerLayer?
@@ -105,13 +105,29 @@ class StackViewController: UIViewController {
     
     private var videos: [VideoModel]? = [] {
         didSet {
-            if let firstVideo = viewModel.getFirstVideo() {
+            if let firstVideo = viewModel!.getFirstVideo() {
                 
                 configureVideo(with: firstVideo)
                 setup()
             }
         }
     }
+    
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+            super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    convenience init(viewModel: ViewModelProtocol) {
+        self.init()
+        self.viewModel = viewModel
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("This class does not support NSCoder")
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,8 +136,8 @@ class StackViewController: UIViewController {
         playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
         pauseButton.addTarget(self, action: #selector(pauseVideo), for: .touchUpInside)
         
-        viewModel.fetchVideos() { [weak self] in
-            self?.videos = self?.viewModel.videos
+        viewModel!.fetchVideos() { [weak self] in
+            self?.videos = self?.viewModel?.videos
         }
     }
     

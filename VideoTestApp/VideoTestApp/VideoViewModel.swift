@@ -7,7 +7,7 @@
 
 import Foundation
 
-class VideoViewModel {
+class VideoViewModel: ViewModelProtocol {
     private let dataSource: DataSourceProtocol
     var videos = [VideoModel]()
     
@@ -32,4 +32,11 @@ class VideoViewModel {
         return videos[1]
     }
 
+}
+
+protocol ViewModelProtocol: AnyObject {
+    var videos: [VideoModel] { get set }
+    
+    func fetchVideos(completion: @escaping () -> ())
+    func getFirstVideo() -> VideoModel?
 }

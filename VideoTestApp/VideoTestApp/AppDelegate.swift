@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let nav1 = UINavigationController()
-        let mainView = StackViewController() //ViewController = Name of your controller
+        let mainView = StackViewController(viewModel: VideoViewModel()) //ViewController = Name of your controller
         nav1.viewControllers = [mainView]
         self.window!.rootViewController = nav1
         self.window?.makeKeyAndVisible()
