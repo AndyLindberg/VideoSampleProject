@@ -14,7 +14,6 @@ class StackViewController: UIViewController {
     private let viewModel = VideoViewModel()
     
     // AVKit Variables
-    private var playerLayer: AVPlayerLayer?
     private var player: AVPlayer?
     private var playerView = AVPlayerLayer()
     
@@ -123,6 +122,7 @@ class StackViewController: UIViewController {
         viewModel.fetchVideos() { [weak self] in
             self?.videos = self?.viewModel.videos
         }
+        
     }
     
     override func viewDidLayoutSubviews() {
