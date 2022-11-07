@@ -132,10 +132,9 @@ class StackViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { (context) in
-        }) { (context) in
+        coordinator.animate(alongsideTransition: { (_) in
           self.playerView.frame.size = self.videoContainerView.bounds.size
-        }
+        })
       }
     
     private func setup() {
