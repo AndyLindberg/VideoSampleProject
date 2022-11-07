@@ -11,7 +11,6 @@ import AVKit
 class ViewController: UIViewController {
     
     private let viewModel = VideoViewModel()
-    private var playerLayer: AVPlayerLayer?
     private var player: AVPlayer?
     private var playerView = AVPlayerLayer()
     
@@ -36,6 +35,8 @@ class ViewController: UIViewController {
         
         playButton.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
         pauseButton.addTarget(self, action: #selector(pauseVideo), for: .touchUpInside)
+        
+        
 
         
         viewModel.fetchVideos() { [weak self] in
