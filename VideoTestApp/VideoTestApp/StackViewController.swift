@@ -133,7 +133,7 @@ class StackViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: { (_) in
-          self.playerView.frame.size = self.videoContainerView.bounds.size
+          self.playerView.frame = self.videoContainerView.bounds
         })
       }
     
@@ -150,7 +150,7 @@ class StackViewController: UIViewController {
         videoContainerView.translatesAutoresizingMaskIntoConstraints = false
         videoContainerView.widthAnchor.constraint(equalTo: contentStackView.widthAnchor).isActive = true
         videoContainerView.layer.addSublayer(playerView)
-        playerView.frame = videoContainerView.bounds
+        //playerView.frame = videoContainerView.bounds
         
         contentStackView.addArrangedSubview(labelStackview)
         
