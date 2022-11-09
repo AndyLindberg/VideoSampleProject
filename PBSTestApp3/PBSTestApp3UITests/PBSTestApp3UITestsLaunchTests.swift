@@ -1,13 +1,13 @@
 //
-//  VideoTestAppUITestsLaunchTests.swift
-//  VideoTestAppUITests
+//  PBSTestApp3UITestsLaunchTests.swift
+//  PBSTestApp3UITests
 //
-//  Created by Andy Lindberg on 10/21/22.
+//  Created by Andy Lindberg on 11/9/22.
 //
 
 import XCTest
 
-class VideoTestAppUITestsLaunchTests: XCTestCase {
+class PBSTestApp3UITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

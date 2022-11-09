@@ -1,8 +1,8 @@
 //
 //  VideoViewModel.swift
-//  VideoTestApp
+//  PBSTestApp3
 //
-//  Created by Andy Lindberg on 10/21/22.
+//  Created by Andy Lindberg on 11/9/22.
 //
 
 import Foundation
@@ -15,28 +15,19 @@ class VideoViewModel: ViewModelProtocol {
         self.dataSource = dataSource
     }
     
-    func fetchVideos(completion: @escaping () -> ()) {
+    func fetchVideos(completion: @escaping() -> ()) {
         dataSource.fetchVideos { [weak self] result in
-            guard let weakSelf = self else {return}
             switch result {
             case .failure(_):
-                print("failure")
+                print("Error")
             case .success(let response):
-                weakSelf.videos = response.videos
+                self?.videos = response.videos
                 completion()
             }
         }
     }
     
     func getFirstVideo() -> VideoModel? {
-        return videos[0]
+        videos[0]
     }
-
-}
-
-protocol ViewModelProtocol: AnyObject {
-    var videos: [VideoModel] { get set }
-    
-    func fetchVideos(completion: @escaping () -> ())
-    func getFirstVideo() -> VideoModel?
 }

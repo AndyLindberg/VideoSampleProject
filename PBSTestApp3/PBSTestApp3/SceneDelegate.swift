@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  VideoTestApp
+//  PBSTestApp3
 //
-//  Created by Andy Lindberg on 10/21/22.
+//  Created by Andy Lindberg on 11/9/22.
 //
 
 import UIKit
@@ -17,9 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let winScene = (scene as? UIWindowScene) else { return }
-
+        
         // Create the root view controller as needed
-        let vc = StackViewController(viewModel: VideoViewModel())
+        let vc = ViewController(viewModel: VideoViewModel())
         let nc = UINavigationController(rootViewController: vc)
         
         // Create the window. Be sure to use this initializer and not the frame one.

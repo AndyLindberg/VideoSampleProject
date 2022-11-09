@@ -1,20 +1,20 @@
 //
 //  NetworkManager.swift
-//  VideoTestApp
+//  PBSTestApp3
 //
-//  Created by Andy Lindberg on 10/21/22.
+//  Created by Andy Lindberg on 11/9/22.
 //
 
 import Foundation
 
 class NetworkManager: DataSourceProtocol {
     func fetchVideos(completion: @escaping (Result<Videos, Error>) -> ()) {
-        let urlString = StringConstants.videoURL
-        fetchData(urlString: urlString, completion: completion)
+        fetchData(with: StringConstants.videoURL, completion: completion)
     }
     
-    func fetchData<T: Decodable>(urlString: String, completion: @escaping (Result<T, Error>) -> ()) {
-        guard let url = URL(string: urlString) else {return}
+
+    func fetchData<T: Decodable>(with urlString: String, completion: @escaping(Result<T, Error>) -> ()) {
+        guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -26,27 +26,23 @@ class NetworkManager: DataSourceProtocol {
             guard let data = data else {
                 return
             }
-
+            
             do {
-                let decoded: T = try data.decoded()
-                
+                let jsonData: T = try data.decoded()
                 DispatchQueue.main.async {
-                    completion(.success(decoded))
+                    completion(.success(jsonData))
                 }
-            }
-            catch let error {
+            }catch {
                 DispatchQueue.main.async {
-                    print("error")
                     completion(.failure(error))
                 }
             }
         }.resume()
     }
-    
 }
 
 extension Data {
-    func decoded<T: Decodable>() throws -> T {
-        return try JSONDecoder().decode(T.self, from: self)
+    func decoded<T:Decodable>() throws -> T {
+        try JSONDecoder().decode(T.self, from: self)
     }
 }

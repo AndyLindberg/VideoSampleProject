@@ -1,8 +1,8 @@
 //
 //  VideoModel.swift
-//  VideoTestApp
+//  PBSTestApp3
 //
-//  Created by Andy Lindberg on 10/21/22.
+//  Created by Andy Lindberg on 11/9/22.
 //
 
 import Foundation
@@ -11,16 +11,13 @@ struct VideoModel: Decodable {
     let id: Int?
     let title: String?
     let description: String?
-    let thumbnailURL: String?
     let videoURL: String?
-    
+    let thumbnailURL: String?
     
     enum CodingKeys: String, CodingKey {
-        case id
-        case title
-        case description
-        case thumbnailURL = "thumbnail_url"
+        case id, title, description
         case videoURL = "video_url"
+        case thumbnailURL = "thumbnail_url"
     }
 }
 
