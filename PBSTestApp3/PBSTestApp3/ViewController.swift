@@ -114,6 +114,13 @@ class ViewController: UIViewController {
         playerView.frame = videoContainerView.bounds
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (context) in
+            self.playerView.frame = self.videoContainerView.bounds
+        })
+    }
+    
     private func configureVideo(with videoModel: VideoModel) {
         guard let videoURLString = videoModel.videoURL else { return }
         
