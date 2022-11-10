@@ -11,7 +11,7 @@ class VideoViewModel: ViewModelProtocol {
     private let dataSource: DataSourceProtocol
     var videos = [VideoModel]()
     
-    init(dataSource: DataSourceProtocol = NetworkManager()) {
+    init(dataSource: DataSourceProtocol) {
         self.dataSource = dataSource
     }
     

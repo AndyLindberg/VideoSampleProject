@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let winScene = (scene as? UIWindowScene) else { return }
         
         // Create the root view controller as needed
-        let vc = ViewController(viewModel: VideoViewModel())
+        let vc = ViewController(viewModel: VideoViewModel(dataSource: NetworkManager()))
         let nc = UINavigationController(rootViewController: vc)
         
         // Create the window. Be sure to use this initializer and not the frame one.
