@@ -16,6 +16,11 @@ class NetworkManager: DataSourceProtocol {
     func fetchData<T: Decodable>(with urlString: String, completion: @escaping(Result<T, Error>) -> ()) {
         guard let url = URL(string: urlString) else { return }
         
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "GET"
+//        request.setValue("1", forHTTPHeaderField: "ff-coding-exercise")
+//        with: request below
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 DispatchQueue.main.async {
@@ -24,6 +29,12 @@ class NetworkManager: DataSourceProtocol {
             }
             
             guard let data = data else {
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+                let error = NSError(domain: "pbs", code: 404, userInfo: [NSLocalizedDescriptionKey: "Failed"])
+                completion(.failure(error))
                 return
             }
             
